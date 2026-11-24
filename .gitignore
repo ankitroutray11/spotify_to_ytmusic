@@ -1,0 +1,11 @@
+.env
+.spotify_cache*
+browser.json
+headers.txt
+test_auth.py
+spotify_urls*.txt
+__pycache__/
+*.pyc
+video_cache.json
+resolved_songs.json
+
