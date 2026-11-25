@@ -2,6 +2,7 @@
 Import Local Music Collection to YouTube Music and Shutdown PC
 """
 
+import argparse
 import os
 import sys
 import json
@@ -102,8 +103,12 @@ def add_to_playlist_robust(ytm: YTMusic, playlist_id: str, video_ids: list, chun
 
 
 def main():
+    parser = argparse.ArgumentParser(description="Import local music collection to YouTube Music.")
+    parser.add_argument("--shutdown", action="store_true", help="Shut down PC 60 seconds after import completes.")
+    args = parser.parse_args()
+
     print("==================================================")
-    print(" Local Music Importer -> YouTube Music & Shutdown")
+    print(" Local Music Importer -> YouTube Music")
     print("==================================================")
 
     # 1. Initialize YTMusic
@@ -211,10 +216,13 @@ def main():
     print(f" Master Playlist: https://music.youtube.com/playlist?list={master_playlist_id}")
     print("==================================================")
 
-    # 6. Shutdown PC
-    print("\n[5/5] Task complete. Initiating PC shutdown in 60 seconds...")
-    print("Run 'shutdown /a' in command prompt if you want to abort.")
-    os.system('shutdown /s /t 60 /c "Antigravity Music Import Complete. Shutting down PC."')
+    # 6. Optional Shutdown PC
+    if args.shutdown:
+        print("\n[5/5] Task complete. Initiating PC shutdown in 60 seconds...")
+        print("Run 'shutdown /a' in command prompt if you want to abort.")
+        os.system('shutdown /s /t 60 /c "Antigravity Music Import Complete. Shutting down PC."')
+    else:
+        print("\n[5/5] Task complete. (Pass --shutdown to auto-shutdown after import.)")
 
 
 if __name__ == "__main__":
